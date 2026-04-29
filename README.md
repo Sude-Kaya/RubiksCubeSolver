@@ -1,2 +1,2 @@
 # RubicsCubeSolverCV
-Ruvics Cube solver with Computer Vision
+Rubic's Cube solver with Computer Vision
