@@ -1,63 +1,50 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-from matplotlib.animation import FuncAnimation
 
-def draw_animated_cube(matrix):
-    fig, ax = plt.subplots(figsize=(5, 4))
-    ax.set_facecolor('#121212')
-    colors = {
-        'W': '#FFFFFF',
-        'Y': '#FEFE33',
-        'R': '#EE0000',
-        'O': '#FF5900',
-        'G': '#009B48',
-        'B': '#0000FF'
-    }
-    face_positions = [(3, 6), (3, 0), (3, 3), (9, 3), (0, 3), (6, 3)]
 
-    def init():
-        ax.set_xlim(0, 12)
-        ax.set_ylim(0, 9)
-        ax.set_aspect('equal')
-        plt.axis('off') 
-        return []
-    def update(face_index):
-        face_data = matrix[face_index]
-        base_x, base_y = face_positions[face_index]
-        for i in range(9):
-            row = i // 3
-            col = i % 3
-            color_letter = face_data[i]
+COLORS = {
+    'W': '#FFFFFF', 'Y': '#FEFE33', 'R': '#EE0000',
+    'O': '#FF5900', 'G': '#009B48', 'B': '#0000FF'
+}
 
-            if color_letter in colors:
-                x = base_x + col
-                y = base_y + (2 - row) 
 
-                square = patches.Rectangle(  
-                    (x, y), 1, 1, 
-                    linewidth=1.5,
-                    edgecolor='black',
-                    facecolor=colors[color_letter]
-                )
-                ax.add_patch(square)
+FACE_POSITIONS = [(3, 3), (3, 6), (0, 3), (6, 3), (3, 0), (9, 3)]
+FACE_NAMES = ["FRONT", "UP", "LEFT", "RIGHT", "DOWN", "BACK"]
 
-        plt.title(f"Face {face_index + 1} being placed...", color='black', fontsize=10)
-        return []
-    animation = FuncAnimation(
-        fig,
-        update,
-        frames=range(6), 
-        init_func=init,
-        interval=2000,
-        repeat=False
-    )
+def setup_screen():
+   
+    plt.ion()
+    fig, ax = plt.subplots(figsize=(8, 6))
+    ax.set_xlim(0, 12)
+    ax.set_ylim(0, 9)
+    ax.set_aspect('equal')
+    ax.set_facecolor('#F0F0F0')
+    plt.axis('off')
     plt.show()
-data = [
-    ['R', 'W', 'G', 'B', 'Y', 'O', 'W', 'R', 'G'],  
-    ['Y', 'B', 'O', 'R', 'G', 'W', 'Y', 'B', 'O'],  
-    ['G', 'Y', 'R', 'W', 'B', 'O', 'G', 'Y', 'R'], 
-    ['B', 'R', 'O', 'G', 'W', 'Y', 'B', 'R', 'O'],  
-    ['O', 'W', 'B', 'R', 'G', 'Y', 'O', 'W', 'B'], 
-    ['W', 'G', 'R', 'B', 'O', 'Y', 'W', 'G', 'R']   
-]
-draw_animated_cube(data)
+    return fig, ax
+
+def draw_face(ax, face_data, face_index):
+ 
+    if face_index < 0 or face_index >= 6:
+        return
+
+    base_x, base_y = FACE_POSITIONS[face_index]
+    
+    for i in range(9):
+        row, col = i // 3, i % 3
+        color_letter = face_data[i]
+        
+        if color_letter in COLORS:
+            
+            x, y = base_x + col, base_y + (2 - row)
+            
+            rect = patches.Rectangle(
+                (x, y), 1, 1,
+                linewidth=2, edgecolor='black',
+                facecolor=COLORS[color_letter]
+            )
+            ax.add_patch(rect)
+    
+    plt.title(f"Currently being processed: {FACE_NAMES[face_index]}", fontweight='bold')
+    plt.draw()
+    plt.pause(0.1) 
