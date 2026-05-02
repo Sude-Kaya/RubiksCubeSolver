@@ -7,7 +7,7 @@ colors = {
 "red" : [0,0,255],
 "blue" : [255,100,0],
 "white" : [255,255,255], 
-"green" : [0,255,0],
+"green" : [10,255,0],
 "orange" : [0,100,255],
 }
 
@@ -22,7 +22,7 @@ def get_limits(color):
     hsvC = cv.cvtColor(c, cv.COLOR_BGR2HSV)
    
     hue = int(hsvC[0][0][0])
-    lower_limit=max(hue - 10,0),100,50
+    lower_limit=max(hue - 10,0),30,50
     upper_limit=min(hue + 10,179),255,255
 
     if color == [255,255,255]:
@@ -40,18 +40,20 @@ def detectCellColor(hsv_frame, cell_coords):
     y1, y2 = cell_coords[0]
     x1, x2 = cell_coords[1]
 
-    # center pixel
-    cx = (x1 + x2) // 2
-    cy = (y1 + y2) // 2
+    roi = hsv_frame[y1+25:y2-25, x1+25:x2-25]
 
-    h, s, v = hsv_frame[cy, cx]
+    avg_color = np.mean(roi, axis=(0,1)) 
+
+    avg_hue = avg_color[0]
+    avg_saturation = avg_color[1]
+    avg_value = avg_color[2]
 
     for name, bgr in colors.items():
         l, u = get_limits(bgr)
 
-        if (l[0] <= h <= u[0] and
-            l[1] <= s <= u[1] and
-            l[2] <= v <= u[2]):
+        if (l[0] <= avg_hue <= u[0] and
+            l[1] <= avg_saturation <= u[1] and
+            l[2] <= avg_value <= u[2]):
             return name
 
     return "unknown"
