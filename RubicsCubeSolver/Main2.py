@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 from DetectFace import *
-from CubeVisualizer import setup_screen, draw_face, plt 
+from CubeVisualizer import *
 
 
 capture = cv.VideoCapture(0)
