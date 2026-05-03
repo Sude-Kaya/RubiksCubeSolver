@@ -46,7 +46,7 @@ def scanFace():
 while True:
     isTrue, frame = capture.read()
     if not isTrue:
-        print("Kamera algılanamadı!")
+        print("Camera not detected!")
         break
 
     hsv_img = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
@@ -57,7 +57,7 @@ while True:
         showGrid(face_name)
         current_face_data = scanFace() 
 
-        # 'c' tuşuna basıldığında onaylar ve çizdirir
+        
         if key == ord('c'):
             target_idx = face_indices[face_name][0]
             cube_state[target_idx] = current_face_data
@@ -69,17 +69,17 @@ while True:
            
             draw_face(ax, formatted_face, target_idx)
             
-            print(f"{face_name} kaydedildi: {formatted_face}")
+            print(f"{face_name} Recorded: {formatted_face}")
             current_face_idx += 1
 
             if current_face_idx >= len(faces):
-                print("TÜM YÜZLER OKUNDU!")
+                print("ALL FACES WERE READ!")
                 phase = "SOLVING"
                 
     elif phase == "SOLVING":
         cv.putText(frame, "Solving Phase...", (200,50), cv.FONT_HERSHEY_COMPLEX, 1.0, (0,0,255), 2)
 
-    cv.imshow("Kup Tarayici", frame)
+    cv.imshow("Cube scanner", frame)
     
     
     if key == ord('d'):
