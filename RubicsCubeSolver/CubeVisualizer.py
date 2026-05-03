@@ -48,5 +48,6 @@ def draw_face(ax, face_data, face_index):
             ax.add_patch(rect)
     
     plt.title(f"Last Scanned: {FACE_NAMES[face_index]}", fontweight='bold')
-    plt.draw()
-    plt.pause(0.01) 
+    ax.figure.canvas.draw_idle()   
+    ax.figure.canvas.flush_events() 
+    plt.pause(0.01)
