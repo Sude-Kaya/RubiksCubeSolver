@@ -1,17 +1,16 @@
 import cv2 as cv
 import numpy as np
 from DetectFace import *
-
 from CubeVisualizer import setup_screen, draw_face, plt 
 
 
 capture = cv.VideoCapture(0)
 
-
 face_indices = {
     "front": [0, False], "up": [1, False], "left": [2, False], 
     "right": [3, False], "down": [4, False], "back": [5, False]
 }
+
 faces = ["front", "up", "left", "right", "down", "back"]
 current_face_idx = 0
 cube_state = np.full((6, 9), "unknown", dtype='<U10')
@@ -38,8 +37,10 @@ def scanFace():
         current_face[i] = cell_color
         y1, y2 = cell[0]
         x1, x2 = cell[1]
-        cx, cy = (x1 + x2) // 2 - 30, (y1 + y2) // 2 - 30
-        cv.putText(frame, cell_color, (cx, cy), cv.FONT_HERSHEY_COMPLEX, 0.8, (0,255,0), 2)
+        cx = (x1 + x2) // 2 - 30
+        cy = (y1 + y2) // 2 - 30
+        cv.putText(frame, cell_color, (cx, cy), 
+                   cv.FONT_HERSHEY_COMPLEX, 0.8, (0,255,0), 2)
     return current_face
 
 
@@ -53,14 +54,13 @@ while True:
     key = cv.waitKey(1) & 0xFF
     
     if phase == "SCANNING":
-        face_name = faces[current_face_idx]
-        showGrid(face_name)
-        current_face_data = scanFace() 
+        face = faces[current_face_idx]
+        showGrid(face)
+        current_face = scanFace() 
 
         
         if key == ord('c'):
-            target_idx = face_indices[face_name][0]
-            cube_state[target_idx] = current_face_data
+            cube_state[face_indices[face][0]] = current_face
             face_indices[face_name][1] = True
             
             
@@ -69,7 +69,7 @@ while True:
            
             draw_face(ax, formatted_face, target_idx)
             
-            print(f"{face_name} Recorded: {formatted_face}")
+            print(f"{face} Recorded: {formatted_face}")
             current_face_idx += 1
 
             if current_face_idx >= len(faces):
