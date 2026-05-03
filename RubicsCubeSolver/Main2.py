@@ -60,14 +60,16 @@ while True:
 
         
         if key == ord('c'):
-            cube_state[face_indices[face][0]] = current_face
-            face_indices[face_name][1] = True
+            target_idx = face_indices[face][0]
+            
+            cube_state[target_idx] = current_face
+            face_indices[face][1] = True
             
             
-            formatted_face = [color[0].upper() if color != "unknown" else "unknown" for color in current_face_data]
+            formatted_face = [color[0].upper() if color != "unknown" else "unknown" for color in current_face]
             
            
-            draw_face(ax, formatted_face, target_idx)
+            draw_face(ax, formatted_face,target_idx)
             
             print(f"{face} Recorded: {formatted_face}")
             current_face_idx += 1
