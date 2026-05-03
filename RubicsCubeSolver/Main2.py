@@ -70,6 +70,9 @@ while True:
             
            
             draw_face(ax, formatted_face,target_idx)
+            fig.canvas.draw_idle()
+            fig.canvas.flush_events()
+            plt.pause(0.01)
             
             print(f"{face} Recorded: {formatted_face}")
             current_face_idx += 1
