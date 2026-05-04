@@ -83,13 +83,13 @@ while True:
                 
     elif phase == "SOLVING":
         cv.putText(frame, "Solving Phase...", (200,50), cv.FONT_HERSHEY_COMPLEX, 1.0, (0,0,255), 2)
-               solution = solve_from_colors(
-        cube_state[0],
-        cube_state[1],
-        cube_state[2],
-        cube_state[3],
-        cube_state[4],
-        cube_state[5]
+        solution = solve_from_colors(
+          cube_state[0],
+          cube_state[1],
+          cube_state[2],
+          cube_state[3],
+          cube_state[4],
+          cube_state[5]
     )
 
         print("Solution:", solution)
