@@ -22,8 +22,12 @@ moves_translation = {
     "L2": "Rotate LEFT face 180 degrees",
 }
 
+SOLVED_STATE = "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB"
+
+
 def solve_from_colors(face_u, face_r, face_f, face_d, face_l, face_b):
     try:
+       
         color_to_pos = {
             face_u[4]: 'U',
             face_r[4]: 'R',
@@ -33,22 +37,34 @@ def solve_from_colors(face_u, face_r, face_f, face_d, face_l, face_b):
             face_b[4]: 'B',
         }
 
-        combined_faces = np.concatenate([face_u, face_r, face_f, face_d, face_l, face_b])
+        combined_faces = np.concatenate([
+            face_u, face_r, face_f,
+            face_d, face_l, face_b
+        ])
 
         if "unknown" in combined_faces:
             return ["Error: Cube not fully scanned"]
 
-        kociemba_input = ''.join([ color_to_pos[color] for color in combined_faces ])
+        try:
+            kociemba_input = ''.join([color_to_pos[color] for color in combined_faces])
+        except KeyError:
+            return ["Error: Color mismatch (centers may be incorrect)"]
+
+        print("Kociemba input:", kociemba_input)
+
+        
+        if kociemba_input == SOLVED_STATE:
+            return ["Cube is already solved"]
 
         raw_output = kociemba.solve(kociemba_input)
         raw_moves = raw_output.split()
 
-        translated_moves = [ moves_translation.get(move, move) for move in raw_moves ]
+      
+        translated_moves = [
+            moves_translation.get(move, move) for move in raw_moves
+        ]
 
         return translated_moves
-
-    except KeyError:
-        return ["Error: Color mismatch"]
 
     except Exception as e:
         return [f"Error: {str(e)}"]
