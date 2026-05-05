@@ -6,8 +6,15 @@ from Solver import *
 
 capture = cv.VideoCapture(0)
 
-face_indices = {"front" : [2, 0] , "left" :[4, 1] , "right" : [1, 2] , "up" : [0, 3] , "down" :[3, 4], "back" : [5,5]}
-faces = ["front", "left", "right", "up", "down", "back"]
+
+face_indices = {
+    "front": [2, 0], 
+    "up":    [0, 1], 
+    "left":  [4, 2], 
+    "right": [1, 3], 
+    "down":  [3, 4], 
+    "back":  [5, 5]
+}
 current_face_idx = 0
 cube_state = np.full((6, 9), "unknown", dtype='<U10')
 scan_complete = False
