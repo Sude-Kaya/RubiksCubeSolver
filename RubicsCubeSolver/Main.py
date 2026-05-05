@@ -1,14 +1,19 @@
 import cv2 as cv
 import numpy as np
 from DetectFace import *
+from CubeVisualizer import *
+from Solver import *
 
 capture = cv.VideoCapture(0)
-face_indices = {"front" : [2, False] , "left" :[4, False] , "right" : [1, False] , "up" : [0, False] , "down" :[3, False], "back" : [5, False]}
+
+face_indices = {"front" : [2, 0] , "left" :[4, 1] , "right" : [1, 2] , "up" : [0, 3] , "down" :[3, 4], "back" : [5,5]}
 faces = ["front", "left", "right", "up", "down", "back"]
 current_face_idx = 0
-cube_state = np.full((6, 9), "unknown")
+cube_state = np.full((6, 9), "unknown", dtype='<U10')
 scan_complete = False
 phase = "SCANNING"
+
+fig, ax = setup_screen()
 
 def showGrid(face):
     cv.putText(frame, f"Scan the {face} face", (190,50), cv.FONT_HERSHEY_COMPLEX, 0.8, (0,255,0), 2)
@@ -20,7 +25,7 @@ def showGrid(face):
     cv.putText(frame, "Press 'c' to confirm", (190,450), cv.FONT_HERSHEY_COMPLEX, 0.8, (0,255,0), 2)
 
 def scanFace():
-    current_face = np.full(9, "unknown")
+    current_face = np.full(9, "unknown", dtype='<U10')
 
     for i, cell in enumerate(cells):
         cell_color = detectCellColor(hsv_img, cell)
@@ -49,11 +54,17 @@ while True:
 
         current_face = scanFace() 
 
-
         if key == ord('c'):
-            cube_state[face_indices[face][0]] = current_face
-            face_indices[face][1] = True
+            target_idx = face_indices[face][0]
+            cube_state[target_idx] = current_face
+            
+            formatted_face = [color[0].upper() if color != "unknown" else "unknown" for color in current_face]
+            
+            draw_face(ax, formatted_face,face_indices[face][1])
+            
+            print(f"{face} Recorded: {formatted_face}")
             current_face_idx += 1
+
             print(cube_state)
             print(f"{face} saved:", current_face)
 
@@ -64,11 +75,21 @@ while True:
     elif phase == "SOLVING":
         cv.putText(frame, f"Solving...", (200,50), cv.FONT_HERSHEY_COMPLEX, 1.0, (0,255,0), 2)
 
-        #Solver module integration here
+        solution = solve_from_colors(
+          cube_state[0],
+          cube_state[1],
+          cube_state[2],
+          cube_state[3],
+          cube_state[4],
+          cube_state[5]
+    )
 
-    cv.imshow("frame", frame)
+        print("Solution:", solution)
+
+    cv.imshow("Rubik's Cube Solver", frame)
     if key == ord('d'):
         break
 
 capture.release()
 cv.destroyAllWindows()
+plt.ioff()
