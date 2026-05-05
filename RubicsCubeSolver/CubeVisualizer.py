@@ -17,7 +17,7 @@ FACE_NAMES = ["FRONT", "UP", "LEFT", "RIGHT", "DOWN", "BACK"]
 def setup_screen():
     """Initializes the interactive Matplotlib window."""
     plt.ion()
-    fig, ax = plt.subplots(figsize=(8, 6))
+    fig, ax = plt.subplots(figsize=(6,4)) #Figure size is smaller now
     ax.set_xlim(0, 12)
     ax.set_ylim(0, 9)
     ax.set_aspect('equal')
