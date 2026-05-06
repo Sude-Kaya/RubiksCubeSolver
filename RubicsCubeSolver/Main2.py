@@ -93,7 +93,7 @@ while True:
 
     cv.imshow("Rubik's Cube Solver", frame)
     
-    if key == ord('d') 
+    if key == ord('d'):
         break
 
 capture.release()
