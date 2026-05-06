@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-import matplotlib.pyplot as plt  # Eksik olan import eklendi
+import matplotlib.pyplot as plt 
 from DetectFace import *
 from CubeVisualizer import *
 from Solver import *
@@ -21,7 +21,6 @@ current_face_idx = 0
 cube_state = np.full((6, 9), "unknown", dtype='<U10')
 phase = "SCANNING"
 
-# CubeVisualizer'dan gelen kurulum
 fig, ax = setup_screen()
 plt.ion() 
 
