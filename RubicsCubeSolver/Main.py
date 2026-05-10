@@ -14,8 +14,6 @@ scan_complete = False
 phase = "SCANNING"
 solution = None
 fig, ax = setup_screen()
-cv.namedWindow("Rubik's Cube Solver", cv.WINDOW_NORMAL)
-cv.resizeWindow("Rubik's Cube Solver", 1800, 900)
 
 def showGrid(face):
     cv.putText(blank, f"Current step: scan the {face} face", (400,50), cv.FONT_HERSHEY_COMPLEX, 0.8, (255,255,255), 2)
