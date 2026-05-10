@@ -6,8 +6,8 @@ from Solver import *
 
 capture = cv.VideoCapture(0)
 
-face_indices = {"front" : [2, 0] , "left" :[4, 2] , "right" : [1, 3] , "top" : [0, 1] , "bottom" :[3, 4], "back" : [5,5]}
-faces = ["front", "left", "right", "top", "bottom", "back"]
+face_indices = {"front" : [2, 0] , "right" :[1, 3] , "back" : [5,5] , "left" : [4, 2] , "top" :[0, 1], "bottom" : [3,4]}
+faces = ["front", "right", "back", "left", "top", "bottom"]
 current_face_idx = 0
 cube_state = np.full((6, 9), "unknown", dtype='<U10')
 scan_complete = False
