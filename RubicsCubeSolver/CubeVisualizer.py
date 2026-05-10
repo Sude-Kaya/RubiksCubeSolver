@@ -11,8 +11,8 @@ COLORS = {
 }
 
 
-FACE_POSITIONS = [(3, 3), (3, 6), (0, 3), (6, 3), (3, 0), (9, 3)]
-FACE_NAMES = ["FRONT", "UP", "LEFT", "RIGHT", "DOWN", "BACK"]
+FACE_POSITIONS = [(3, 3), (0,3), (9, 3), (6, 3), (3, 6), (3,0)]
+FACE_NAMES = ["FRONT", "RIGHT" "BACK", "LEFT", "UP", "DOWN"]
 
 def setup_screen():
     """Initializes the interactive Matplotlib window."""
