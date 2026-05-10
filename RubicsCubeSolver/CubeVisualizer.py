@@ -16,14 +16,20 @@ FACE_NAMES = ["FRONT", "UP", "LEFT", "RIGHT", "DOWN", "BACK"]
 
 def setup_screen():
     """Initializes the interactive Matplotlib window."""
-    plt.ion()
-    fig, ax = plt.subplots(figsize=(6,4)) #Figure size is smaller now
+    fig, ax = plt.subplots(figsize=(6,4))
     ax.set_xlim(0, 12)
     ax.set_ylim(0, 9)
     ax.set_aspect('equal')
     ax.set_facecolor('#F0F0F0')
     plt.axis('off')
-    plt.show()
+    fig.patch.set_alpha(0)
+    ax.patch.set_alpha(0)
+    plt.subplots_adjust(
+        left=0,
+        right=1,
+        top=1,
+        bottom=0
+    )
     return fig, ax
 
 def draw_face(ax, face_data, face_index):
@@ -46,8 +52,3 @@ def draw_face(ax, face_data, face_index):
                 facecolor=COLORS[color_letter]
             )
             ax.add_patch(rect)
-    
-    plt.title(f"Last Scanned: {FACE_NAMES[face_index]}", fontweight='bold')
-    ax.figure.canvas.draw_idle()   
-    ax.figure.canvas.flush_events() 
-    plt.pause(0.01)
