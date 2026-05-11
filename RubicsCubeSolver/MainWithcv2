@@ -8,7 +8,7 @@ from Solver import *
 
 capture = cv.VideoCapture(0)
 
-face_indices = {"front" : [2, 0] , "right" :[1, 3] , "back" : [5,5] , "left" : [4, 2] , "top" :[0, 1], "bottom" : [3,4]}
+face_indices = {"front" : [0, 0] , "right" :[1, 1] , "back" : [2,2] , "left" : [3,3] , "top" :[4,4], "bottom" : [5,5]}
 faces = ["front", "right", "back", "left", "top", "bottom"]
 current_face_idx = 0
 cube_state = np.full((6, 9), "unknown", dtype='<U10')
@@ -76,14 +76,14 @@ while True:
 
             if current_face_idx >= len(faces):
                 phase = "SOLVING"
-                solution = solve_from_colors(*cube_state)
+                solution = solve_from_colors(cube_state[4],cube_state[1],cube_state[0],cube_state[5],cube_state[3],cube_state[2])
                 
     elif phase == "SOLVING":
         cv.putText(blank, f"Solving...", (530,50), cv.FONT_HERSHEY_COMPLEX, 1.0, (255,255,255), 2)
         
 
    
-    blank[80:560, 20:660] = cv.resize(frame, (640, 480)) # Frame boyutu uyumu için
+    blank[80:560, 20:660] = cv.resize(frame, (640, 480)) 
     render_Cube_Net_CV(blank, visualizer_canvas)
     
     cv.imshow("Rubik's Cube Solver", blank)
