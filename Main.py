@@ -240,7 +240,7 @@ while True:
         )
         if len(approx) == 4:
             x,y,w,h = cv.boundingRect(approx)
-            if w > 200 or h > 200:
+            if w > 150 or h > 150:
                 continue
             rect_area = w * h
 
