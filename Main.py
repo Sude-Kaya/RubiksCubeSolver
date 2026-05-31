@@ -230,17 +230,17 @@ while True:
     for cnt in contours:
         area = cv.contourArea(cnt)
     
-        if area < 500:
+        if area < 800:
             continue
         peri = cv.arcLength(cnt, True)
         approx = cv.approxPolyDP(
             cnt,
-            0.08 * peri,
+            0.04 * peri,
             True
         )
         if len(approx) == 4:
             x,y,w,h = cv.boundingRect(approx)
-            if w > 120 or h > 120:
+            if w > 200 or h > 200:
                 continue
             rect_area = w * h
 
