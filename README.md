@@ -18,6 +18,8 @@ A computer vision-based Rubik's Cube Solver that scans a physical 3×3 Rubik's C
 
 * **Grid Mode**
   * Uses a fixed-position grid, recommended when automatic detection is unreliable
+ 
+You can switch between track and grid mode any time.
 
 <img width="908" height="499" alt="SS3" src="https://github.com/user-attachments/assets/9129deea-ecbb-4b77-bb55-bb6bad0cf724" />
 
@@ -127,6 +129,9 @@ python Main.py
    * **NEXT MOVE**
    * **PREV MOVE**
 4. Continue until the cube is solved.
+
+Tip: Press "q" to force quit the program any time.
+
 ---
 
 ## Requirements
