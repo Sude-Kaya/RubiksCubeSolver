@@ -80,12 +80,16 @@ RubiksCubeSolver/
 ├── MainHelper.py
 └── README.md
 ```
-Main.py: Controls application flow, GUI logic, webcam interaction, and state transitions.
-DetectFace.py: Handles cube face detection, color classification.
-Solver.py: Generates the solution sequence.
-SolutionVisualizer.py: Draws arrow overlays on the frame that show users how to perform each move.
-CubeVisualizer.py: Displays the interactive cube net used during scanning and editing.
-MainHelper.py: Contains UI utilities, animations, and helper functions.
+### Project Structure
+
+| File | Description |
+|------|-------------|
+| `Main.py` | Controls application flow, GUI logic, webcam interaction, and state transitions. |
+| `DetectFace.py` | Handles cube face detection and color classification. |
+| `Solver.py` | Generates the solution sequence using the Kociemba algorithm. |
+| `SolutionVisualizer.py` | Draws arrow overlays that guide the user through each move. |
+| `CubeVisualizer.py` | Displays the interactive cube net used during scanning and editing. |
+| `MainHelper.py` | Contains UI utilities, animations, and helper functions. |
 ---
 ## Installation
 Clone the repository:
