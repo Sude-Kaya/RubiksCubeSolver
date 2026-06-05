@@ -82,7 +82,6 @@ RubiksCubeSolver/
 ├── MainHelper.py
 └── README.md
 ```
-### Project Structure
 
 | File | Description |
 |------|-------------|
