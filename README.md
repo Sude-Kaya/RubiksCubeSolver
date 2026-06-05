@@ -1,4 +1,4 @@
-# Rubik's Cube Solver with Computer Vision
+# Rubik's Cube Solver
 
 A computer vision-based Rubik's Cube Solver that scans a physical 3×3 Rubik's Cube using a webcam, reconstructs the cube state, computes a solution using the Kociemba algorithm, and provides interactive visual guidance for solving the cube.
 
