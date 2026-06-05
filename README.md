@@ -43,14 +43,6 @@ You can switch between track and grid mode any time.
 <img width="905" height="499" alt="SS2" src="https://github.com/user-attachments/assets/8e234bd9-0c99-4636-8dc3-e4884f63b54a" />
 
 ---
-## Tools Used
-* Python 3.7+
-* OpenCV
-* NumPy
-* Matplotlib
-* Kociemba
----
-
 ## System Architecture
 
 ```
@@ -92,6 +84,7 @@ RubiksCubeSolver/
 | `CubeVisualizer.py` | Displays the interactive cube net used during scanning and editing. |
 | `MainHelper.py` | Contains UI utilities, animations, and helper functions. |
 ---
+
 ## Installation
 Clone the repository:
 ```bash
@@ -137,6 +130,14 @@ Tip: Press "q" to force quit the program any time.
 ### Hardware
 * Webcam
 * 3×3 Rubik's Cube
+  
+### Software
+```text
+numpy==2.2.5
+opencv-python==4.13.0.92
+matplotlib==3.10.1
+kociemba==1.2.1
+```
 
 ### Recommended Environment
 * Good lighting
