@@ -101,7 +101,9 @@ Install dependencies:
 ```bash
 pip install opencv-python numpy matplotlib kociemba
 ```
+
 ❗ If installation of 'kociemba' fails on Windows, try enabling the Desktop development with C++ workload through Visual Studio Installer.
+
 ---
 
 ## Usage
